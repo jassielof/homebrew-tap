@@ -1,6 +1,6 @@
 # quarto.rb
 # Personal tap formula: installs Quarto CLI v1.7.32
-class Quarto < Formula
+class QuartoCli < Formula
   desc "Scientific and technical publishing system built on Pandoc"
   homepage "https://www.quarto.org/"
   version "1.7.32"
