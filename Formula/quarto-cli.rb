@@ -4,6 +4,7 @@ class QuartoCli < Formula
   desc "Scientific and technical publishing system built on Pandoc"
   homepage "https://www.quarto.org/"
   version "1.7.32"
+  license "MIT"
 
   # --------------------------
   # Platform-specific source & SHA256
@@ -29,8 +30,6 @@ class QuartoCli < Formula
       sha256 "262505e3d26459c64e66efefd4b9240eb755ea20dd6fe876d6aa64c7a7b13d27"
     end
   end
-
-  license "MIT"
 
   # --------------------------
   # Livecheck against GitHub releases
