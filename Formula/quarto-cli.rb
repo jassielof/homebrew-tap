@@ -10,7 +10,7 @@ class QuartoCli < Formula
   # Livecheck against GitHub releases
   # --------------------------
   livecheck do
-    url "https://github.com/quarto-dev/quarto-cli"
+    url :stable
     strategy :github_latest
   end
 
