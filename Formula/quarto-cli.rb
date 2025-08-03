@@ -3,6 +3,7 @@
 class QuartoCli < Formula
   desc "Scientific and technical publishing system built on Pandoc"
   homepage "https://www.quarto.org/"
+  version "1.7.32"
   license "MIT"
 
   # --------------------------
