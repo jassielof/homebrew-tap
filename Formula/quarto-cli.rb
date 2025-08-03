@@ -7,6 +7,14 @@ class QuartoCli < Formula
   license "MIT"
 
   # --------------------------
+  # Livecheck against GitHub releases
+  # --------------------------
+  livecheck do
+    url "https://github.com/quarto-dev/quarto-cli"
+    strategy :github_latest
+  end
+
+  # --------------------------
   # Platform-specific source & SHA256
   # --------------------------
   on_macos do
@@ -29,14 +37,6 @@ class QuartoCli < Formula
       url "https://github.com/quarto-dev/quarto-cli/releases/download/v#{version}/quarto-#{version}-linux-amd64.tar.gz"
       sha256 "262505e3d26459c64e66efefd4b9240eb755ea20dd6fe876d6aa64c7a7b13d27"
     end
-  end
-
-  # --------------------------
-  # Livecheck against GitHub releases
-  # --------------------------
-  livecheck do
-    url "https://github.com/quarto-dev/quarto-cli"
-    strategy :github_latest
   end
 
   # --------------------------
