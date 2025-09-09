@@ -14,20 +14,6 @@ class QuartoCli < Formula
     strategy :github_latest
   end
 
-  # --------------------------
-  # Platform-specific source & SHA256
-  # --------------------------
-  on_macos do
-    on_arm do
-      url "https://github.com/quarto-dev/quarto-cli/releases/download/v#{version}/quarto-#{version}-macos.tar.gz"
-      sha256 "b49912bbe2b507f03d0bac9089f0e97437a87226c59a371e4eff8712557b16e8"
-    end
-    on_intel do
-      url "https://github.com/quarto-dev/quarto-cli/releases/download/v#{version}/quarto-#{version}-macos.tar.gz"
-      sha256 "b49912bbe2b507f03d0bac9089f0e97437a87226c59a371e4eff8712557b16e8"
-    end
-  end
-
   on_linux do
     on_arm do
       url "https://github.com/quarto-dev/quarto-cli/releases/download/v#{version}/quarto-#{version}-linux-arm64.tar.gz"
