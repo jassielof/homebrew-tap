@@ -1,32 +1,22 @@
 class QuartoCli < Formula
   desc "Scientific and technical publishing system built on Pandoc"
   homepage "https://quarto.org/"
-  url "https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.24/quarto-1.8.24-linux-amd64.tar.gz"
-  sha256 "6b83c1c9b6f2ce6454798b42260bd2ee184551d74debe817b8aaf28b09ac22d0"
   license "GPL-2.0-or-later"
 
-  depends_on macos: :big_sur if OS.mac?
-  depends_on "deno" => :recommended
-  depends_on "esbuild" => :recommended
-  depends_on "pandoc" => :recommended
-  depends_on "sass/sass/sass" => :recommended
+  # This tap's formula is intentionally Linux-only. macOS users should use the official cask.
+  if OS.mac?
+    odie "This formula is Linux-only. On macOS install the official Quarto cask:\n  brew install --cask quarto"
+  end
+
+  depends_on "deno" => :optional
+  depends_on "esbuild" => :optional
   depends_on "julia" => :optional
   depends_on "node" => :optional
+  depends_on "pandoc" => :optional
   depends_on "python@3.12" => :optional
   depends_on "r" => :optional
+  depends_on "sass/sass/sass" => :optional
   depends_on "typst" => :optional
-
-  on_macos do
-    on_intel do
-      url "https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.24/quarto-1.8.24-macos.tar.gz"
-      sha256 "8f3be3719e8332c4583bd03aeb541b7c5aebc4f24c1799502c97051bbaa88c63"
-    end
-
-    on_arm do
-      url "https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.24/quarto-1.8.24-macos.tar.gz"
-      sha256 "8f3be3719e8332c4583bd03aeb541b7c5aebc4f24c1799502c97051bbaa88c63"
-    end
-  end
 
   on_linux do
     on_intel do
@@ -44,68 +34,51 @@ class QuartoCli < Formula
     # Install all files preserving directory structure
     libexec.install Dir["*"]
 
-    # Create symlink for the main executable
+    # Symlink main executable
     bin.install_symlink libexec/"bin/quarto"
 
-    # Install man pages if they exist
-    man1.install_symlink Dir[libexec/"share/man/man1/*"] if (libexec/"share/man").exist?
+    # Man pages
+    man1.install_symlink Dir[libexec/"share/man/man1/*"] if (libexec/"share/man/man1").exist?
 
-    # Set up completion scripts if they exist
+    # Shell completions
     if (libexec/"share/bash-completion/completions").exist?
       bash_completion.install_symlink libexec/"share/bash-completion/completions/quarto"
     end
-
     if (libexec/"share/zsh/site-functions").exist?
       zsh_completion.install_symlink libexec/"share/zsh/site-functions/_quarto"
     end
-
     if (libexec/"share/fish/vendor_completions.d").exist?
       fish_completion.install_symlink libexec/"share/fish/vendor_completions.d/quarto.fish"
     end
   end
 
-  def post_install
-    # Create necessary directories and setup
-    (var/"quarto").mkpath
-
-    # Initialize quarto tools if needed
-    system bin/"quarto", "tools", "install", "tinytex", "--quiet" if which("pdflatex").nil?
-  end
-
+  # Avoid network activity in post_install (no TinyTeX auto-install here).
   def caveats
     <<~EOS
-      Quarto has been installed successfully.
+      Quarto (Linux binary) installed.
 
-      For optimal functionality, consider installing optional dependencies:
-        - Python: brew install python@3.12
-        - R: brew install --cask r
-        - Julia: brew install julia
-        - Node.js: brew install node
-        - Typst: brew install typst
-        - Sass: brew install sass/sass/sass
+      Optional tools you may want to install separately (all optional in this formula):
+        brew install pandoc deno esbuild node python@3.12 r julia typst sass/sass/sass
 
-      To render PDFs, you'll need a LaTeX distribution.
-      Quarto can install TinyTeX automatically:
+      For LaTeX/PDF rendering install a TeX distribution or run:
         quarto install tinytex
+      (This performs a network install outside Homebrew.)
 
-      To check your Quarto installation:
+      On macOS use the official cask instead:
+        brew install --cask quarto
+
+      Check installation:
         quarto check
 
-      Documentation is available at: https://quarto.org/docs/
+      Docs: https://quarto.org/docs/
     EOS
   end
 
   test do
-    # Test basic functionality
     assert_match "Quarto #{version}", shell_output("#{bin}/quarto --version").strip
-
-    # Test help command
     assert_match "Usage:", shell_output("#{bin}/quarto --help")
-
-    # Test check command
     system bin/"quarto", "check"
 
-    # Test creating a basic document
     (testpath/"test.qmd").write <<~EOS
       ---
       title: "Test Document"
@@ -115,13 +88,7 @@ class QuartoCli < Formula
       # Hello Quarto
 
       This is a test document.
-
-      ```{python}
-      print("Hello from Python!")
-      ```
     EOS
-
-    # Test rendering (basic functionality without requiring all engines)
     system bin/"quarto", "render", "test.qmd", "--to", "html", "--no-execute"
     assert_path_exists testpath/"test.html"
   end
