@@ -1,6 +1,8 @@
 class QuartoCli < Formula
   desc "Scientific and technical publishing system built on Pandoc"
   homepage "https://quarto.org/"
+  url "https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.24/quarto-1.8.24-linux-amd64.tar.gz"
+  sha256 "6b83c1c9b6f2ce6454798b42260bd2ee184551d74debe817b8aaf28b09ac22d0"
   license "GPL-2.0-or-later"
 
   # This tap's formula is intentionally Linux-only. macOS users should use the official cask.
