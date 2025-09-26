@@ -1,25 +1,21 @@
 class QuartoCli < Formula
   desc "Scientific and technical publishing system built on Pandoc"
   homepage "https://quarto.org/"
+  url "https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.24/quarto-1.8.24-linux-amd64.tar.gz"
+  sha256 "6b83c1c9b6f2ce6454798b42260bd2ee184551d74debe817b8aaf28b09ac22d0"
   license "GPL-2.0-or-later"
 
-  # Dependencies - must come before platform-specific blocks and in alphabetical order
   depends_on macos: :big_sur if OS.mac?
   depends_on "deno" => :recommended
   depends_on "esbuild" => :recommended
+  depends_on "pandoc" => :recommended
+  depends_on "sass/sass/sass" => :recommended
   depends_on "julia" => :optional
   depends_on "node" => :optional
-  depends_on "pandoc" => :recommended
   depends_on "python@3.12" => :optional
   depends_on "r" => :optional
-  depends_on "sass/sass/sass" => :recommended
   depends_on "typst" => :optional
 
-  # Default URL and SHA256 (Linux AMD64)
-  url "https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.24/quarto-1.8.24-linux-amd64.tar.gz"
-  sha256 "6b83c1c9b6f2ce6454798b42260bd2ee184551d74debe817b8aaf28b09ac22d0"
-
-  # Platform-specific URLs and checksums
   on_macos do
     on_intel do
       url "https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.24/quarto-1.8.24-macos.tar.gz"
