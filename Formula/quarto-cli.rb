@@ -5,6 +5,11 @@ class QuartoCli < Formula
   sha256 "6b83c1c9b6f2ce6454798b42260bd2ee184551d74debe817b8aaf28b09ac22d0"
   license "GPL-2.0-or-later"
 
+  livecheck do
+    url :stable
+    strategy :github_latest
+  end
+
   # This tap's formula is intentionally Linux-only. macOS users should use the official cask.
   if OS.mac?
     odie "This formula is Linux-only. On macOS install the official Quarto cask:\n  brew install --cask quarto"
