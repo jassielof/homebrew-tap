@@ -12,6 +12,16 @@ jobs:
             contents: write
             pull-requests: write
         steps:
+            - name: Tap the repository
+              run: brew tap jassielof/homebrew-tap
+
+            - name: Debug livecheck
+              run: |
+                echo "=== Running livecheck in verbose mode ==="
+                brew livecheck --formula --tap=jassielof/homebrew-tap --verbose
+                echo "=== Checking only quarto-cli ==="
+                brew livecheck quarto-cli --tap=jassielof/homebrew-tap --verbose
+
             - name: Bump outdated formulae (livecheck)
               uses: dawidd6/action-homebrew-bump-formula@v5
               with:
