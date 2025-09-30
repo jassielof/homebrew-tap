@@ -12,13 +12,12 @@ jobs:
             contents: write
             pull-requests: write
         steps:
+            - uses: actions/checkout@v4
             - name: Bump outdated formulae (livecheck)
               uses: dawidd6/action-homebrew-bump-formula@v5
               with:
                   token: ${{ secrets.HOMEBREW_BUMP_TOKEN }}
                   tap: jassielof/homebrew-tap
-                  formula: quarto-cli
                   livecheck: true
-                  no_fork: true
                   user_name: github-actions[bot]
                   user_email: github-actions[bot]@users.noreply.github.com
