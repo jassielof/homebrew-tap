@@ -16,16 +16,6 @@ class QuartoCli < Formula
     odie "This formula is Linux-only. On macOS install the official Quarto cask:\n  brew install --cask quarto"
   end
 
-  depends_on "deno" => :optional
-  depends_on "esbuild" => :optional
-  depends_on "julia" => :optional
-  depends_on "node" => :optional
-  depends_on "pandoc" => :optional
-  depends_on "python@3.12" => :optional
-  depends_on "r" => :optional
-  depends_on "sass/sass/sass" => :optional
-  depends_on "typst" => :optional
-
   on_linux do
     on_intel do
       url "https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.25/quarto-1.8.25-linux-amd64.tar.gz"
