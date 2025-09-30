@@ -3,7 +3,7 @@ class QuartoCli < Formula
   homepage "https://quarto.org/"
   url "https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.24/quarto-1.8.24-linux-amd64.tar.gz"
   sha256 "6b83c1c9b6f2ce6454798b42260bd2ee184551d74debe817b8aaf28b09ac22d0"
-  version = "1.8.24"
+  version "1.8.24"
   license "GPL-2.0-or-later"
 
   livecheck do
