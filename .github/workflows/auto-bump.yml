@@ -2,7 +2,7 @@ name: Auto bump Homebrew formulae
 
 on:
     schedule:
-        - cron: "0 3 * * *" # daily at 03:00 UTC
+        - cron: "0 3 * * *"
     workflow_dispatch:
 
 jobs:
@@ -21,3 +21,14 @@ jobs:
                   livecheck: true
                   user_name: github-actions[bot]
                   user_email: github-actions[bot]@users.noreply.github.com
+
+            - name: Enable auto-merge for bump PR
+              if: success()
+              env:
+                  GH_TOKEN: ${{ secrets.HOMEBREW_BUMP_TOKEN }}
+              run: |
+                  # Get the PR number from the latest PR by the bot
+                  PR_NUMBER=$(gh pr list --author "github-actions[bot]" --limit 1 --json number --jq '.[0].number')
+                  if [ -n "$PR_NUMBER" ]; then
+                    gh pr merge "$PR_NUMBER" --auto --squash
+                  fi
