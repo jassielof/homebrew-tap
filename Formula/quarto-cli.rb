@@ -1,9 +1,9 @@
 class QuartoCli < Formula
   desc "Scientific and technical publishing system built on Pandoc"
   homepage "https://quarto.org/"
-  url "https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.26/quarto-1.8.26-linux-amd64.tar.gz"
-  version "1.8.26"
-  sha256 "ad8caa6d3aecc3f2b6a4a8fb8296677ef2ef9410a48a3eeba7b1f9a1c91000f0"
+  url "https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.27/quarto-1.8.27-linux-amd64.tar.gz"
+  version "1.8.27"
+  sha256 "bdf689b5589789a1f21d89c3b83d78ed02a97914dd702e617294f2cc1ea7387d"
   license "GPL-2.0-or-later"
 
   livecheck do
@@ -18,8 +18,8 @@ class QuartoCli < Formula
 
   on_linux do
     on_intel do
-      url "https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.26/quarto-1.8.26-linux-amd64.tar.gz"
-      sha256 "ad8caa6d3aecc3f2b6a4a8fb8296677ef2ef9410a48a3eeba7b1f9a1c91000f0"
+      url "https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.27/quarto-1.8.27-linux-amd64.tar.gz"
+      sha256 "bdf689b5589789a1f21d89c3b83d78ed02a97914dd702e617294f2cc1ea7387d"
     end
 
     on_arm do
